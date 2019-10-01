@@ -26,13 +26,10 @@ public class UsersManageServlet extends HttpServlet {
 
   @Inject
   private TemplateProvider templateProvider;
-
   @Inject
   private UsersPageService usersPageService;
-
   @Inject
   private UserService userService;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -48,7 +45,6 @@ public class UsersManageServlet extends HttpServlet {
     Integer lastPageNo = usersPageService
         .getLastNumberPage(usersPerSite, userService.getUsersList());
 
-
     Template template = templateProvider.getTemplate(getServletContext(),
         "admin-view-users.ftlh");
 
@@ -56,7 +52,6 @@ public class UsersManageServlet extends HttpServlet {
     dataModel.put("lastPageNumber", lastPageNo);
     dataModel.put("pageNumber", pageNo);
     dataModel.put("usersPerPage", usersPerPage);
-
     PrintWriter writer = resp.getWriter();
     try {
       template.process(dataModel, writer);

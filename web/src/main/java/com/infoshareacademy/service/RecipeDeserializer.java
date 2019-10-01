@@ -25,28 +25,18 @@ public class RecipeDeserializer extends JsonDeserializer<RecipeResponse> {
   public RecipeResponse deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 
     Map<String, String> ingredients = new HashMap<>();
-
     RecipeResponse drinkRecipe = new RecipeResponse();
     JsonNode tree = p.readValueAsTree();
-
     String[] errors = {"null"};
-
     for (int index = 1; index < 16; index++) {
-
       index = (char) index;
-
       JsonNode ingredientNode = tree.get("strIngredient" + index);
-
       if (ingredientNode == null) {
         break;
       }
-
       String trim = ingredientNode.asText().trim();
-
       for (String error : errors) {
-
         if (!trim.equals(error) && !trim.isEmpty()) {
-
           ingredients.put(tree.get("strIngredient" + index).asText().trim().toLowerCase(),
               tree.get("strMeasure" + index).asText().trim().toLowerCase());
         }

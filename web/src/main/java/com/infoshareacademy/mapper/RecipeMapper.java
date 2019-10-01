@@ -30,7 +30,7 @@ public class RecipeMapper {
     drinkRecipe.setCategory(category);
     drinkRecipe.setCustom(false);
     drinkRecipe.setApproved(true);
-    logger.info("Recipe " + drinkRecipe.getName() + " was mapped");
+    logger.info("Recipe {}} was mapped", drinkRecipe.getName());
     return drinkRecipe;
   }
 }

@@ -15,7 +15,6 @@ public class ApiDataInitializer {
 
   @EJB
   private ApiDataHandler apiDataHandler;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
   private static final String URI = "http://isa-proxy.blueazurit.com/cocktails/1/search.php?f=";
 

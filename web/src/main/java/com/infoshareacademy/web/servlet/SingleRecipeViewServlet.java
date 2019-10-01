@@ -7,9 +7,11 @@ import com.infoshareacademy.service.RecipeService;
 import com.infoshareacademy.service.statistics.StatisticsService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,12 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Transactional
 @WebServlet("/recipe-view")
@@ -42,8 +40,8 @@ public class SingleRecipeViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
 
+        resp.setContentType("text/html;charset=UTF-8");
         String pU;
         if (req.getParameter("pU") == null || req.getParameter("pU").isEmpty()) {
             pU = req.getHeader("referer");
@@ -52,7 +50,6 @@ public class SingleRecipeViewServlet extends HttpServlet {
         }
 
         Long userId = Long.parseLong("2");
-
         String isAdult = "false";
 
         for (Cookie c : req.getCookies()) {
@@ -65,19 +62,15 @@ public class SingleRecipeViewServlet extends HttpServlet {
         String recipeId = req.getParameter("recipeId");
         Long parseToLongRecipeId = Long.parseLong(recipeId);
         Recipe responseRecipeId = recipeService.getRecipeById(parseToLongRecipeId);
-
         List<Long> longList = new ArrayList<>();
         statisticsService.saveToDB(parseToLongRecipeId, longList);
-
         String userType = (String) req.getSession().getAttribute("userType");
         if (Strings.isNullOrEmpty(userType)) {
             req.getSession().setAttribute("userType", "guest");
         }
 
         req.getSession().setAttribute("recipeType", responseRecipeId.getDrinkType());
-
         boolean isFavourite = recipeService.isFavourite(parseToLongRecipeId, userId);
-
         Template template = templateProvider.getTemplate(getServletContext(), "recipe-view.ftlh");
         Map<String, Object> model = new HashMap<>();
         if (responseRecipeId != null) {

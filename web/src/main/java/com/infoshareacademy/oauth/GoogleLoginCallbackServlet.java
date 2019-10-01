@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 public class GoogleLoginCallbackServlet extends AbstractAuthorizationCodeCallbackServlet {
 
   private static final Logger logger = Logger.getLogger(GoogleLoginCallbackServlet.class.getName());
-
   @EJB
   private UserService userService;
 
@@ -31,6 +30,7 @@ public class GoogleLoginCallbackServlet extends AbstractAuthorizationCodeCallbac
   @Override
   protected void onSuccess(HttpServletRequest req, HttpServletResponse resp, Credential credential)
       throws IOException {
+
     GoogleCredential gCredential = new GoogleCredential()
         .setAccessToken(credential.getAccessToken());
     Oauth2 oauth2 = new Oauth2.Builder(
@@ -40,7 +40,6 @@ public class GoogleLoginCallbackServlet extends AbstractAuthorizationCodeCallbac
 
     Userinfoplus info = oauth2.userinfo().get().execute();
     String name = info.getName();
-    String surname = info.getGivenName();
     String email = info.getEmail();
 
     if (userService.findUserByEmail(email) == null){
@@ -52,14 +51,11 @@ public class GoogleLoginCallbackServlet extends AbstractAuthorizationCodeCallbac
     }
 
     logger.info("Authentication success of user: " + name);
-
     User verifiedUser = userService.findUserByEmail(email);
-
     req.getSession().setAttribute("email", verifiedUser.getEmail());
     req.getSession().setAttribute("userType", verifiedUser.getUserType());
     req.getSession().setAttribute("name", verifiedUser.getName());
     req.getSession().setAttribute("userId",verifiedUser.getId());
-
 
     if (req.getSession().getAttribute("userType") == null){
       req.getSession().setAttribute("userType", "guest");

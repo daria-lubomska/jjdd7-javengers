@@ -24,10 +24,8 @@ import org.slf4j.LoggerFactory;
 public class WelcomeServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(WelcomeServlet.class.getName());
-
     @Inject
     private TemplateProvider templateProvider;
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

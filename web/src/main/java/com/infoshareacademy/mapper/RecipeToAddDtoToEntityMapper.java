@@ -20,25 +20,16 @@ import java.util.Properties;
 @Stateless
 public class RecipeToAddDtoToEntityMapper {
 
-
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
     @EJB
     private IngredientMapper ingredientMapper;
-
-    @EJB
-    private  CategoryMapper categoryMapper;
-
 
     @Transactional
     public Recipe mapRecipe(RecipeResponse recipe, Category category) throws IOException {
 
-
         Recipe drinkRecipe = new Recipe();
-
         String datePattern = getDatePattern();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(datePattern);
-
         drinkRecipe.setId(recipe.getId());
         drinkRecipe.setName(recipe.getName());
         drinkRecipe.setDrinkType(recipe.getDrinkType());
@@ -50,7 +41,7 @@ public class RecipeToAddDtoToEntityMapper {
         drinkRecipe.setCategory(category);
         drinkRecipe.setCustom(true);
         drinkRecipe.setApproved(false);
-        logger.info("Recipe " + drinkRecipe.getName() + " was mapped");
+        logger.info("Recipe {} was mapped", drinkRecipe.getName());
         return drinkRecipe;
     }
 
@@ -64,7 +55,4 @@ public class RecipeToAddDtoToEntityMapper {
         logger.info("Date Time format is: " + dateFormat);
         return dateFormat;
     }
-
-
-
 }

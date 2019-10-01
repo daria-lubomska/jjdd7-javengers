@@ -20,7 +20,6 @@ public class NotFoundServlet extends HttpServlet {
 
   @Inject
   private TemplateProvider templateProvider;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
   @Override

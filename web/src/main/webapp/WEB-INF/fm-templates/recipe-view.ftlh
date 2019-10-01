@@ -5,9 +5,7 @@
     <title>single view page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -17,7 +15,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
@@ -26,7 +23,6 @@
         .container {
             color: white;
         }
-
     </style>
 </head>
 <body>
@@ -83,9 +79,7 @@
                                                 aria-controls="name" aria-selected="true"><h4><strong>Recipe
                                         Name</strong></h4></a>
                         </li>
-
                     </ul>
-
                     <div class="tab-content col-sm-12 " id="navTabA">
 
                         <div class="tab-pane active" id="panel_a_name" role="tabpanel" aria-labelledby="name-tab">
@@ -95,7 +89,6 @@
                         </div>
                     </div>
                 </div>
-
                 <#if userType == "admin">
                 <div class="col-sm-1">
                     <label class="btn btn-primary btn-sm" id="del-description" title="delete" style="margin-bottom: 0">
@@ -105,11 +98,8 @@
                     </label>
                 </div>
                 </#if>
-
             </div>
-
         </div>
-
         <div class="col-sm-6" STYLE="margin: auto; padding-top: 24px; padding-bottom: 24px;">
             <h2 class="card-title" style="color: olivedrab">${responseRecipeId.name}</h2>
         </div>

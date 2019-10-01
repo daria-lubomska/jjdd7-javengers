@@ -19,7 +19,6 @@ public class PrivilegesRestService {
 
   @EJB
   private UserService userService;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
   @PATCH
@@ -52,6 +51,7 @@ public class PrivilegesRestService {
   @PATCH
   @Path("/revokeAdminPermissions/{id}")
   public Response revokeAdminPrivilege(@PathParam("id") String userId) {
+
     if (!NumberUtils.isDigits(userId)) {
       return Response.status(Status.BAD_REQUEST).build();
     }

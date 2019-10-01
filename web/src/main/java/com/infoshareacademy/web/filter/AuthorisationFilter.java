@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 public class AuthorisationFilter implements Filter {
 
   private String admin;
-
   @Override
   public void init(FilterConfig filterConfig) {
     admin = filterConfig.getInitParameter("userType");

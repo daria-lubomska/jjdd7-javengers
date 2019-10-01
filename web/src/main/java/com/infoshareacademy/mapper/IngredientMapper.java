@@ -9,11 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Stateless
-public class IngredientMapper {
+class IngredientMapper {
 
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
-  public List<Ingredient> mapIngredients(RecipeResponse recipe) {
+  List<Ingredient> mapIngredients(RecipeResponse recipe) {
 
     List<Ingredient> ingredients = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class IngredientMapper {
       ingredient.setMeasure(value);
       ingredients.add(ingredient);
     });
-    logger.info("Ingredients of recipe " + recipe.toString() + " were mapped");
+    logger.info("Ingredients of recipe {} were mapped", recipe.toString());
     return ingredients;
   }
 }

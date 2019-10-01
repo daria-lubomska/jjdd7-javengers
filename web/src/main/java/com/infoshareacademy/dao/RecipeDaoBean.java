@@ -3,17 +3,17 @@ package com.infoshareacademy.dao;
 import com.infoshareacademy.domain.entity.Category;
 import com.infoshareacademy.domain.entity.Ingredient;
 import com.infoshareacademy.domain.entity.Recipe;
-
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Transactional
 @Stateless
 public class RecipeDaoBean {
+
     @PersistenceContext
     EntityManager entityManager;
 
@@ -85,8 +85,10 @@ public class RecipeDaoBean {
         return queryType.getResultList();
     }
 
-    public List<Recipe> findRecipeByCategoryIdAndIngredientAndType(List<Category> categories, List<Ingredient> ingredients, long namesLength, List<String> drinkTypes) {
-        Query recipeQuery = entityManager.createNamedQuery("Recipe.findRecipeByCategoryIdAndIngredientNameAndType");
+    public List<Recipe> findRecipeByCategoryIdAndIngredientAndType(List<Category> categories,
+        List<Ingredient> ingredients, long namesLength, List<String> drinkTypes) {
+        Query recipeQuery = entityManager.createNamedQuery
+            ("Recipe.findRecipeByCategoryIdAndIngredientNameAndType");
         recipeQuery.setParameter("categories", categories);
         recipeQuery.setParameter("ingredients", ingredients);
         recipeQuery.setParameter("namesLength", namesLength);
@@ -95,7 +97,8 @@ public class RecipeDaoBean {
     }
 
 
-    public List<Recipe> findRecipeByCategoryIdAndType(List<Category> categories, List<String> drinkTypes) {
+    public List<Recipe> findRecipeByCategoryIdAndType(List<Category> categories,
+        List<String> drinkTypes) {
         Query recipeQuery = entityManager.createNamedQuery("Recipe.findRecipeByCategoryIdAndType");
         recipeQuery.setParameter("categories", categories);
         recipeQuery.setParameter("drinkTypes", drinkTypes);
@@ -103,8 +106,10 @@ public class RecipeDaoBean {
     }
 
 
-    public List<Recipe> findFavouriteByCategoryIdAndIngredientAndType(List<Category> categories, List<Ingredient> ingredients, long namesLength, List<String> drinkTypes, Long userId) {
-        Query recipeQuery = entityManager.createNamedQuery("Recipe.findRecipeByCategoryAndIngredientAndTypeAndFavourites");
+    public List<Recipe> findFavouriteByCategoryIdAndIngredientAndType(List<Category> categories,
+        List<Ingredient> ingredients, long namesLength, List<String> drinkTypes, Long userId) {
+        Query recipeQuery = entityManager.createNamedQuery
+            ("Recipe.findRecipeByCategoryAndIngredientAndTypeAndFavourites");
         recipeQuery.setParameter("categories", categories);
         recipeQuery.setParameter("ingredients", ingredients);
         recipeQuery.setParameter("namesLength", namesLength);
@@ -113,8 +118,10 @@ public class RecipeDaoBean {
         return recipeQuery.getResultList();
     }
 
-    public List<Recipe> findFavouriteRecipeByCategoryIdAndType(List<Category> categories, List<String> drinkTypes, Long userId) {
-        Query recipeQuery = entityManager.createNamedQuery("Recipe.findRecipeByCategoryIdAndTypeAndFavourites");
+    public List<Recipe> findFavouriteRecipeByCategoryIdAndType(List<Category> categories,
+        List<String> drinkTypes, Long userId) {
+        Query recipeQuery = entityManager.createNamedQuery(
+            "Recipe.findRecipeByCategoryIdAndTypeAndFavourites");
         recipeQuery.setParameter("categories", categories);
         recipeQuery.setParameter("drinkTypes", drinkTypes);
         recipeQuery.setParameter("id", userId);
@@ -129,14 +136,6 @@ public class RecipeDaoBean {
         return query.getResultList();
     }
 
-    public Recipe getFavouriteRecipeForUser(Long recipeId, Long userId) {
-        Query query = entityManager.createNamedQuery("Recipe.getFavouriteRecipeForUser");
-        query.setParameter("id", userId);
-        query.setParameter("recipeId", recipeId);
-        return (Recipe) query.getSingleResult();
-
-    }
-
     public Long getMaxId() {
         Query query = entityManager.createNamedQuery("Recipe.getTheBiggestId");
         return (Long) query.getSingleResult();
@@ -145,7 +144,5 @@ public class RecipeDaoBean {
     public List<Recipe> getUnauthorizedRecipes(){
         Query query = entityManager.createNamedQuery("Recipe.getUnauthorizedRecipes");
         return query.getResultList();
-
     }
-
 }

@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.List;
 
 @Stateless
 public class UserDaoBean {
@@ -45,13 +44,6 @@ public class UserDaoBean {
         return query.getResultList();
     }
 
-
-    public User findUserByName(String name) {
-        Query query = entityManager.createNamedQuery("User.findUserByName");
-        query.setParameter("name", name);
-        return (User) query.getResultList().stream().findFirst().orElse(null);
-    }
-
     public List<Recipe> getFavouritesList() {
         Query query = entityManager.createNamedQuery("User.getFavouritesList");
         return query.getResultList();
@@ -72,18 +64,15 @@ public class UserDaoBean {
 
     public void editFavouritesByIdForUSer(Long recipeId, Long userId) {
         User userById = getUserById(userId);
-
         List<Recipe> favouriteRecipiecListForUser = userById.getRecipes();
         Recipe toEditRecipe = entityManager.find(Recipe.class, recipeId);
 
         if (favouriteRecipiecListForUser.stream().anyMatch(r -> recipeId.equals(r.getId()))) {
             favouriteRecipiecListForUser.remove(toEditRecipe);
         } else {
-
             favouriteRecipiecListForUser.add(toEditRecipe);
         }
         userById.setRecipes(favouriteRecipiecListForUser);
     }
-
 }
 

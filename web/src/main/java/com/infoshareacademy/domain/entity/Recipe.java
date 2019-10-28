@@ -32,7 +32,7 @@ import java.util.List;
                     + "AND r.isApproved = true ORDER BY r.name ASC "),
         @NamedQuery(
                 name = "Recipe.findRecipeByLiveSearch",
-                query = "SELECT r FROM Recipe as r WHERE r.name LIKE :nameChars "
+                query = "SELECT r FROM Recipe as r WHERE r.name LIKE CONCAT('%',:nameChars,'%') "
                     + "AND r.isApproved = true"),
         @NamedQuery(
                 name = "Recipe.getRecipeTypes",

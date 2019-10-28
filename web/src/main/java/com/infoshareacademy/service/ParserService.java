@@ -19,11 +19,11 @@ public class ParserService implements Serializable {
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
   private ObjectMapper mapper = new ObjectMapper();
 
-  JsonNode getJsonNodeForApiParsing(String recipes) throws IOException {
+  public JsonNode getJsonNodeForApiParsing(String recipes) throws IOException {
     return mapper.readTree(recipes);
   }
 
-  JsonNode getJsonNodeForFileParsing(File file) throws IOException {
+  public JsonNode getJsonNodeForFileParsing(File file) throws IOException {
     return mapper.readTree(file);
   }
 

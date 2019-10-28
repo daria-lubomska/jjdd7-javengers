@@ -16,7 +16,7 @@ public class ApiIngredientService {
   @EJB
   private IngredientService ingredientService;
 
-  List<IngredientLiveSearchView> getLiveSearchIngredient(String name) {
+  public List<IngredientLiveSearchView> getLiveSearchIngredient(String name) {
     logger.info("ingredients with {}in it were mapped", name);
     List<IngredientLiveSearchView> ingredientLiveSearchView = new ArrayList<>();
     ingredientService.findIngredientsForLiveSearch(name).forEach(i -> {

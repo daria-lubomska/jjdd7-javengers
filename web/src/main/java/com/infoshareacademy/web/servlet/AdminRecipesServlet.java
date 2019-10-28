@@ -40,7 +40,7 @@ public class AdminRecipesServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
         List<String> pageNumber = Arrays.asList(getParametersList(req, new String[]{"1"}));
-        Integer pageNo = Integer.parseInt(pageNumber.get(0));
+        int pageNo = Integer.parseInt(pageNumber.get(0));
 
         List<Recipe> recipesPerPage = startingPageService.getRecipesPerPage(
                 pageNo, recipeService.getUnauthorizedRecipes());

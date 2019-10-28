@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
         @NamedQuery(
                 name = "Ingredient.findIngredientByLiveSearch",
-                query = "SELECT distinct i.name FROM Ingredient i WHERE i.name like :nameChars"),
+                query = "SELECT distinct i.name FROM Ingredient i WHERE i.name like CONCAT('%',:nameChars,'%')"),
         @NamedQuery(
                 name = "Ingredient.findIngredientByName",
                 query = "SELECT distinct i.name FROM Ingredient i WHERE i.name in :names"),

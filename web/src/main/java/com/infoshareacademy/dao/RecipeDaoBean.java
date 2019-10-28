@@ -70,7 +70,7 @@ public class RecipeDaoBean {
 
     public List findRecipeByLiveSearch(String nameChars) {
         Query query = entityManager.createNamedQuery("Recipe.findRecipeByLiveSearch");
-        query.setParameter("nameChars", "%" + nameChars + "%");
+        query.setParameter("nameChars", nameChars);
         return query.getResultList();
     }
 

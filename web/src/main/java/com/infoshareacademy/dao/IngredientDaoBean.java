@@ -46,7 +46,7 @@ public class IngredientDaoBean {
     }
     public List<String> findIngredientsByLiveSearch(String nameChars) {
         Query query = entityManager.createNamedQuery("Ingredient.findIngredientByLiveSearch");
-        query.setParameter("nameChars", "%" + nameChars + "%");
+        query.setParameter("nameChars", nameChars);
         return query.getResultList();
     }
     public List<String> getIngredientsList() {

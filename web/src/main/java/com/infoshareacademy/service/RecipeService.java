@@ -49,21 +49,20 @@ public class RecipeService {
         return recipeDaoBean.getRecipeTypes();
     }
 
-    List<Recipe> findRecipeByCategoryIdAndIngredientAndType(List<Category> categories,
+    public List<Recipe> findRecipeByCategoryIdAndIngredientAndType(List<Category> categories,
         List<Ingredient> ingredients, long namesLength, List<String> drinkTypes) {
         return recipeDaoBean.findRecipeByCategoryIdAndIngredientAndType(categories, ingredients, namesLength, drinkTypes);
     }
 
-    List<Recipe> findRecipeByCategoryIdAndType(List<Category> categories, List<String> drinkTypes) {
+    public List<Recipe> findRecipeByCategoryIdAndType(List<Category> categories, List<String> drinkTypes) {
         return recipeDaoBean.findRecipeByCategoryIdAndType(categories, drinkTypes);
     }
 
-    List<Recipe> findFavouriteByCategoryIdAndIngredientAndType(List<Category> categories,
+    public List<Recipe> findFavouriteByCategoryIdAndIngredientAndType(List<Category> categories,
         List<Ingredient> ingredients, long namesLength, List<String> drinkTypes, Long userId) {
         return recipeDaoBean.findFavouriteByCategoryIdAndIngredientAndType(categories, ingredients, namesLength, drinkTypes, userId);
     }
-
-    List<Recipe> findFavouriteRecipeByCategoryIdAndType(List<Category> categories,
+    public List<Recipe> findFavouriteRecipeByCategoryIdAndType(List<Category> categories,
         List<String> drinkTypes, Long userId) {
         return recipeDaoBean.findFavouriteRecipeByCategoryIdAndType(categories, drinkTypes, userId);
     }

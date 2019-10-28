@@ -20,7 +20,7 @@ public class ApiRecipeService {
   @EJB
   private RecipeEntityToDtoMapper mapper;
 
-  List<RecipeLiveSearchView> getLiveSearchRecipe(String nameChars) {
+  public List<RecipeLiveSearchView> getLiveSearchRecipe(String nameChars) {
     logger.info("recipes with {} in it were mapped", nameChars);
     List<RecipeLiveSearchView> recipeLiveSearchViews = new ArrayList<>();
     recipeService.findRecipeForLiveSearch(nameChars).forEach(
@@ -28,7 +28,7 @@ public class ApiRecipeService {
     return recipeLiveSearchViews;
   }
 
-  List getRecipesList() {
+  public List getRecipesList() {
     logger.info("recipes were mapped successfully");
     List<RecipeDto> recipes = new ArrayList<>();
     recipeService.getRecipiesList().forEach(i -> recipes.add(mapper.mapRecipeEntityToDto(i)));

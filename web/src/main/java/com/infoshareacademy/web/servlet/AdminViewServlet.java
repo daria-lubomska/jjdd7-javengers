@@ -26,7 +26,6 @@ public class AdminViewServlet extends HttpServlet {
             throws IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
-
         Template template = templateProvider.getTemplate(getServletContext(),
                 "admin-view.ftlh");
 

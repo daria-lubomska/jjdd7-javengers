@@ -5,6 +5,7 @@ import com.infoshareacademy.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.IOException;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Inject;
@@ -29,8 +30,9 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
 
+        resp.setContentType("text/html;charset=UTF-8");
+        req.getSession().setAttribute("callback", req.getServletPath());
         String userType = (String) req.getSession().getAttribute("userType");
 
         if (Strings.isNullOrEmpty(userType)) {

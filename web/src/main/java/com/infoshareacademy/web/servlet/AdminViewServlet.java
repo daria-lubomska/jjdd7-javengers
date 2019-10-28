@@ -26,6 +26,7 @@ public class AdminViewServlet extends HttpServlet {
             throws IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
+        req.getSession().setAttribute("callback", req.getServletPath());
 
         Template template = templateProvider.getTemplate(getServletContext(),
                 "admin-view.ftlh");

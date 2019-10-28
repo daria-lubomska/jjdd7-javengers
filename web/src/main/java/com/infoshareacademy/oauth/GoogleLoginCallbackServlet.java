@@ -5,6 +5,7 @@ import com.google.api.client.auth.oauth2.AuthorizationCodeResponseUrl;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.servlet.auth.oauth2.AbstractAuthorizationCodeCallbackServlet;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.oauth2.Oauth2;
@@ -58,7 +59,7 @@ public class GoogleLoginCallbackServlet extends AbstractAuthorizationCodeCallbac
     if (req.getSession().getAttribute("userType") == null){
       req.getSession().setAttribute("userType", "guest");
     }
-    resp.sendRedirect("/home");
+    resp.sendRedirect((String) req.getSession().getAttribute("callback"));
   }
 
   @Override

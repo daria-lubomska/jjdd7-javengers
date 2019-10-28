@@ -48,10 +48,11 @@ public class UserHomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        resp.setContentType("text/html;charset=UTF-8");
+        req.getSession().setAttribute("callback", req.getServletPath());
+
         String[] allCheckedCategoriesList = categoryService.getCategoryIds();
         String[] allCheckedTypesList = recipeService.getRecipeTypes().toArray(new String[recipeService.getRecipeTypes().size()]);
-
-        resp.setContentType("text/html;charset=UTF-8");
         List<String> pageNumber = Arrays.asList(getParametersList(req, "page", new String[]{"1"}));
         List<String> checkedCategoriesList = Arrays.asList(getParametersList(req, "categories[]", allCheckedCategoriesList));
         List<String> checkedTypesList = Arrays.asList(getParametersList(req, "types[]", allCheckedTypesList));

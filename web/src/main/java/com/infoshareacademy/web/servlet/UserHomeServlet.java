@@ -82,8 +82,8 @@ public class UserHomeServlet extends HttpServlet {
         if (Strings.isNullOrEmpty(userType)) {
             req.getSession().setAttribute("userType", "guest");
         }
-        String authorization = (String) req.getSession().getAttribute("authorization");
-        if (Strings.isNullOrEmpty(authorization)) {
+
+        if (Strings.isNullOrEmpty((String)req.getSession().getAttribute("authorization"))) {
             req.getSession().setAttribute("authorization", "authorizedAttempt");
         }
 
@@ -106,6 +106,9 @@ public class UserHomeServlet extends HttpServlet {
             model.put("favouritesIdsChecked", favouriteRecipeIdsFromUser);
             model.put("authorization", req.getSession().getAttribute("authorization"));
             model.put("name", req.getSession().getAttribute("name"));
+        }
+        if (req.getSession().getAttribute("authorization").equals("unauthorizedAttempt")) {
+            req.getSession().setAttribute("authorization", "authorizedAttempt");
         }
         try {
             template.process(model, resp.getWriter());

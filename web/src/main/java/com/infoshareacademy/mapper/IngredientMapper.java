@@ -23,7 +23,7 @@ public class IngredientMapper {
       ingredient.setMeasure(value);
       ingredients.add(ingredient);
     });
-    logger.info("Ingredients of recipe " + recipe.toString() + " were mapped");
+    logger.info("Ingredients of recipe {} were mapped", recipe.toString());
     return ingredients;
   }
 }

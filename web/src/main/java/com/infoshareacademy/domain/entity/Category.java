@@ -1,7 +1,6 @@
 package com.infoshareacademy.domain.entity;
 
 import com.infoshareacademy.domain.entity.statistics.RecipeStatistics;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -12,7 +11,7 @@ import javax.validation.constraints.NotNull;
         name = "Category.findCategoryByName",
         query = "SELECT c FROM Category c WHERE c.name like :name"),
 
-     @NamedQuery(
+    @NamedQuery(
                 name = "Category.findCategoryById",
                 query = "SELECT c FROM Category c WHERE c.id in :ids"),
     @NamedQuery(
@@ -22,7 +21,6 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(
                 name = "Category.getCategoryIds",
                 query = "SELECT c.id FROM Category c")
-
 })
 
 @Entity
@@ -68,11 +66,4 @@ public class Category {
         this.recipes = recipes;
     }
 
-    public RecipeStatistics getRecipeStatistics() {
-        return recipeStatistics;
-    }
-
-    public void setRecipeStatistics(RecipeStatistics recipeStatistics) {
-        this.recipeStatistics = recipeStatistics;
-    }
 }

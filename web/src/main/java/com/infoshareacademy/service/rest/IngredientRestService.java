@@ -8,11 +8,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.infoshareacademy.domain.view.IngredientLiveSearchView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 @Path("/ingredients")
@@ -21,14 +19,13 @@ public class IngredientRestService {
 
   @EJB
   private ApiIngredientService apiIngredientService;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
   @GET
   @Path("/nameChars/{nameChars}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getIngredient(@PathParam("nameChars") String nameChars) {
-    logger.info("Ingredients with name contains " +nameChars + " was parsed to json successfully");
+    logger.info("Ingredients with name contains {} was parsed to json successfully", nameChars);
     List<IngredientLiveSearchView> ingredients = apiIngredientService
             .getLiveSearchIngredient(nameChars);
     if (ingredients.isEmpty()) {

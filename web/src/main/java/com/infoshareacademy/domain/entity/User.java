@@ -7,9 +7,6 @@ import java.util.List;
 
 @NamedQueries({
         @NamedQuery(
-                name = "User.findUserByName",
-                query = "SELECT u FROM User u WHERE u.name like :name"),
-        @NamedQuery(
                 name = "User.getUserList",
                 query = "SELECT u FROM User u"),
         @NamedQuery(
@@ -21,19 +18,15 @@ import java.util.List;
         @NamedQuery(
                 name = "User.getFavouritesListIdsForUser",
                 query = "SELECT r.id FROM Recipe r JOIN r.users u WHERE r.id=u.id AND u.id=:id"),
-                //query = "SELECT r.recipe_id FROM User u JOIN u.recipes r WHERE r.id=u.id AND u.id=:id"),
-
         @NamedQuery(
                 name = "User.getFavouriteRecipeByIdForUser",
                 query = "SELECT r FROM User u JOIN u.recipes r WHERE r.id= :id AND u.id=:idu"),
-
-
-    @NamedQuery(
-        name = "User.findUserByEmail",
-        query = "SELECT u FROM User u WHERE u.email like :email"),
-    @NamedQuery(
-        name = "User.getUsersList",
-        query = "SELECT u FROM User u")
+        @NamedQuery(
+            name = "User.findUserByEmail",
+            query = "SELECT u FROM User u WHERE u.email like :email"),
+        @NamedQuery(
+            name = "User.getUsersList",
+            query = "SELECT u FROM User u")
 })
 
 @Entity

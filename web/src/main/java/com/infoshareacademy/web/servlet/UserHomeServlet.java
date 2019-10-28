@@ -4,13 +4,19 @@ import com.google.common.base.Strings;
 import com.infoshareacademy.domain.entity.Category;
 import com.infoshareacademy.domain.entity.Recipe;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.*;
+import com.infoshareacademy.service.CategoryService;
+import com.infoshareacademy.service.IngredientService;
+import com.infoshareacademy.service.RecipeService;
+import com.infoshareacademy.service.StartingPageService;
 import com.infoshareacademy.service.statistics.StatisticsService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -18,12 +24,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet("/home")
 public class UserHomeServlet extends HttpServlet {
@@ -37,10 +39,6 @@ public class UserHomeServlet extends HttpServlet {
     private RecipeService recipeService;
     @Inject
     private IngredientService ingredientService;
-    @Inject
-    private FilteringService filteringService;
-    @Inject
-    private UserService userService;
     @Inject
     private TemplateProvider templateProvider;
     @Inject
@@ -58,16 +56,11 @@ public class UserHomeServlet extends HttpServlet {
         List<String> checkedCategoriesList = Arrays.asList(getParametersList(req, "categories[]", allCheckedCategoriesList));
         List<String> checkedTypesList = Arrays.asList(getParametersList(req, "types[]", allCheckedTypesList));
         List<String> checkedIngredientsList = Arrays.asList(getParametersList(req, "ingredients[]", new String[]{}));
-
         String active = req.getParameter("active");
         List<String> checkedOptionList = Arrays.asList(getParametersList(req, "listOptions[]", new String[]{"All Drinks"}));
-        List<String> favouriteIdList = Arrays.asList(getParametersList(req, "favToChangeId", new String[]{"0"}));
         Long userId = (Long) req.getSession().getAttribute("userId");
-
         Integer pageNo = Integer.parseInt(pageNumber.get(0));
         String checkedListOption = checkedOptionList.get(0);
-        Long favouriteId = Long.parseLong(favouriteIdList.get(0));
-
         List<Category> categoriesList = categoryService.getCategoriesList();
 
         List<String> ingredientList = ingredientService.getIngredientsList();

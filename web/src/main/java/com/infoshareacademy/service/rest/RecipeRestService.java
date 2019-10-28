@@ -22,17 +22,13 @@ public class RecipeRestService {
 
   @EJB
   private ApiRecipeService apiRecipeService;
-
-  @EJB
-  private RecipeService recipeService;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
   @GET
   @Path("/nameChars/{nameChars}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getNotification(@PathParam("nameChars") String nameChars) {
-    logger.info("recipes with name contains " + nameChars + "were parsed to json successfully" );
+    logger.info("recipes with name contains {} were parsed to json successfully", nameChars );
     List<RecipeLiveSearchView> recipes = apiRecipeService.getLiveSearchRecipe(nameChars);
     if (recipes.isEmpty()) {
       logger.warn("Cannot find ingredients {} contains " + nameChars);

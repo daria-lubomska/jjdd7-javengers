@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 public class UserService {
 
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
   @Inject
   UserDaoBean userDaoBean;
 
@@ -46,20 +45,8 @@ public class UserService {
     return userDaoBean.getUsersList();
   }
 
-  public List<Recipe> getFavouritesList() {
-    return userDaoBean.getFavouritesList();
-  }
-
-  public  List<Long> getFavouritesListIdsForUser(Long userId) {
-    return userDaoBean.getFavouritesListIds(userId);
-  }
-  public Recipe getFavouriteRecipeByIdForUser(Long favouriteId, Long userId) {
-    return userDaoBean.getFavouriteRecipeByIdForUser(favouriteId, userId);
-  }
-
   public void editFavouritesByIdForUSer( Long recipeId, Long userId) {
     userDaoBean.editFavouritesByIdForUSer(recipeId, userId);
     logger.info("Recipe changed its favourites status");
   }
-
 }

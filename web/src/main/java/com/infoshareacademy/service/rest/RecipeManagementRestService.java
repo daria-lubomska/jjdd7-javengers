@@ -36,8 +36,6 @@ public class RecipeManagementRestService {
     return Response.ok().build();
   }
 
-
-
   @PATCH
   @Path("/updateRecipe/{id}")
   public Response updateRecipe(@PathParam("id") String userId) {

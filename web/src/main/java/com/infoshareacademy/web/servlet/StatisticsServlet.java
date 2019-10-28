@@ -1,32 +1,25 @@
 package com.infoshareacademy.web.servlet;
 
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.statistics.StatisticsService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet("/superHero/statistics")
 public class StatisticsServlet extends HttpServlet {
 
     @Inject
-    private StatisticsService statisticsService;
-
-    @Inject
     private TemplateProvider templateProvider;
-
-
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Override
@@ -35,11 +28,8 @@ public class StatisticsServlet extends HttpServlet {
 
         PrintWriter printWriter = resp.getWriter();
         Template template = templateProvider.getTemplate(getServletContext(), "contentStatistics.ftlh");
-
         Map<String, Object> dataModel = new HashMap<>();
-
         dataModel.put("userType", req.getSession().getAttribute("userType"));
-
 
         try {
             template.process(dataModel, printWriter);
@@ -47,5 +37,4 @@ public class StatisticsServlet extends HttpServlet {
             logger.error(e.getMessage());
         }
     }
-
 }

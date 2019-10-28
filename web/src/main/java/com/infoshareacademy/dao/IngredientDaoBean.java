@@ -1,4 +1,5 @@
 package com.infoshareacademy.dao;
+
 import com.infoshareacademy.domain.entity.Ingredient;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Stateless
 public class IngredientDaoBean {
+
     @PersistenceContext
     EntityManager entityManager;
 
@@ -44,7 +46,7 @@ public class IngredientDaoBean {
     }
     public List<String> findIngredientsByLiveSearch(String nameChars) {
         Query query = entityManager.createNamedQuery("Ingredient.findIngredientByLiveSearch");
-        query.setParameter("nameChars", "%" + nameChars + "%");
+        query.setParameter("nameChars", nameChars);
         return query.getResultList();
     }
     public List<String> getIngredientsList() {

@@ -34,8 +34,8 @@ public class ApiDataHandler {
         fileParserService.loadDataToDatabase(recipes);
       }
     } catch (IOException e) {
-      logger.error("Load data from: " + uri + " failed", e);
+      logger.error("Load data from: {} failed",uri, e);
     }
-    logger.info("data form" + uri + " was saved successfully");
+    logger.info("data form {} was saved successfully", uri);
   }
 }

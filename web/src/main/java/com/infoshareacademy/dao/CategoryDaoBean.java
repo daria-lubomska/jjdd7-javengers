@@ -39,7 +39,7 @@ public class CategoryDaoBean {
     public String[] getCategoryIds() {
         Query query = entityManager.createNamedQuery("Category.getCategoryIds");
         List<Long> categoryIdList = query.getResultList();
-        return categoryIdList.stream().map(l -> l.toString()).toArray(String[]::new);
+        return categoryIdList.stream().map(Object::toString).toArray(String[]::new);
     }
 
     public List<Category> getCategoriesById(List<Long> ids) {

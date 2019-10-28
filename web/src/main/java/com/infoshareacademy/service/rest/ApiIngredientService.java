@@ -13,12 +13,11 @@ import org.slf4j.LoggerFactory;
 public class ApiIngredientService {
 
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
   @EJB
   private IngredientService ingredientService;
 
   public List<IngredientLiveSearchView> getLiveSearchIngredient(String name) {
-    logger.info("ingredients with " + name + "in it were mapped");
+    logger.info("ingredients with {}in it were mapped", name);
     List<IngredientLiveSearchView> ingredientLiveSearchView = new ArrayList<>();
     ingredientService.findIngredientsForLiveSearch(name).forEach(i -> {
       IngredientLiveSearchView ingredient = new IngredientLiveSearchView();

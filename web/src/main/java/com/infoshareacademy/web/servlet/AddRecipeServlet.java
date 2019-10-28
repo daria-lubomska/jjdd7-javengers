@@ -35,21 +35,16 @@ import javax.transaction.Transactional;
 public class AddRecipeServlet extends HttpServlet {
 
     private Logger logger = Logger.getLogger(getClass().getName());
-
     @Inject
     FileUploadProcessor fileUploadProcessor;
     @Inject
     private TemplateProvider templateProvider;
-
     @Inject
     RecipeToAddDtoToEntityMapper recipeToAddDtoToEntityMapper;
-
     @EJB
     RecipeService recipeService;
-
     @EJB
     CategoryService categoryService;
-
     @EJB
     CategoryMapper categoryMapper;
 
@@ -57,10 +52,8 @@ public class AddRecipeServlet extends HttpServlet {
             throws IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
-
         Template template = templateProvider.getTemplate(getServletContext(),
                 "add-recipe-view.ftlh");
-
         List<Category> categoriesList = categoryService.getCategoriesList();
         List<String> typeList = recipeService.getRecipeTypes();
 
@@ -69,7 +62,6 @@ public class AddRecipeServlet extends HttpServlet {
         dataModel.put("typeList", typeList);
         dataModel.put("userType", req.getSession().getAttribute("userType"));
         dataModel.put("email", req.getSession().getAttribute("email"));
-
         PrintWriter writer = resp.getWriter();
         try {
             template.process(dataModel, writer);
@@ -89,10 +81,6 @@ public class AddRecipeServlet extends HttpServlet {
         String instructions = req.getParameter("instructions");
         String[] ingredientList = req.getParameterValues("ingredient");
         String[] measuresList = req.getParameterValues("measure");
-
-        /*CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setName(categoryName);*/
-
         Map<String, String> ingredients = new HashMap<>();
 
         for (int i = 0; i < ingredientList.length; i++) {
@@ -100,7 +88,6 @@ public class AddRecipeServlet extends HttpServlet {
         }
 
         Long idOfRecipe = recipeService.getMaxId();
-
         RecipeResponse recipe = new RecipeResponse();
         recipe.setId(++idOfRecipe);
         recipe.setName(name);
@@ -109,7 +96,6 @@ public class AddRecipeServlet extends HttpServlet {
         recipe.setRecipeCategory(categoryName);
         recipe.setInstruction(instructions);
         recipe.setIngredients(ingredients);
-
         Part image = req.getPart("image");
         String imageUrl = "";
         try {
@@ -120,14 +106,11 @@ public class AddRecipeServlet extends HttpServlet {
         }
 
         recipe.setImageUrl(imageUrl);
-
         Category category = Optional
                 .ofNullable(categoryService.findCategoryByName(recipe.getRecipeCategory()))
                 .orElseGet(() -> categoryMapper.mapCategory(recipe));
         category.getRecipes().add(recipeToAddDtoToEntityMapper.mapRecipe(recipe, category));
         categoryService.updateCategory(category);
-
-
         resp.sendRedirect("/home");
     }
 }

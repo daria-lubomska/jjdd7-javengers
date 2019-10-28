@@ -16,13 +16,10 @@ import org.slf4j.LoggerFactory;
 public class FileParserService {
 
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
     @EJB
     private RecipeMapper recipeMapper;
-
     @EJB
     private CategoryMapper categoryMapper;
-
     @EJB
     private CategoryDaoBean categoryDaoBean;
 
@@ -34,7 +31,7 @@ public class FileParserService {
             category.getRecipes().add(recipeMapper.mapRecipes(recipe, category));
             categoryDaoBean.updateCategory(category);
         }
-        logger.info("Recipes " + recipes.toString() + " were saved successfully");
+        logger.info("Recipes {} were saved successfully", recipes.toString());
         return null;
     }
 }

@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-public class GoogleLoginCommons {
+class GoogleLoginCommons {
 
   private static final Logger logger = Logger.getLogger(GoogleLoginCommons.class.getName());
   private static final String OAUTH_FILE_NAME = "oauth.properties";

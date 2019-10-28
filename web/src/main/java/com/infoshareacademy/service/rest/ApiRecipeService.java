@@ -15,15 +15,13 @@ import org.slf4j.LoggerFactory;
 public class ApiRecipeService {
 
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
   @EJB
   private RecipeService recipeService;
-
   @EJB
   private RecipeEntityToDtoMapper mapper;
 
   public List<RecipeLiveSearchView> getLiveSearchRecipe(String nameChars) {
-    logger.info("recipes with " + nameChars + "in it were mapped");
+    logger.info("recipes with {} in it were mapped", nameChars);
     List<RecipeLiveSearchView> recipeLiveSearchViews = new ArrayList<>();
     recipeService.findRecipeForLiveSearch(nameChars).forEach(
         i -> recipeLiveSearchViews.add(mapper.mapRecipeEntityForLiveSearch(i)));

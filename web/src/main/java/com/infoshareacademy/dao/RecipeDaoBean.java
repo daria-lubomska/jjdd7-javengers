@@ -3,7 +3,6 @@ package com.infoshareacademy.dao;
 import com.infoshareacademy.domain.entity.Category;
 import com.infoshareacademy.domain.entity.Ingredient;
 import com.infoshareacademy.domain.entity.Recipe;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +13,7 @@ import java.util.List;
 @Transactional
 @Stateless
 public class RecipeDaoBean {
+
     @PersistenceContext
     EntityManager entityManager;
 
@@ -70,7 +70,7 @@ public class RecipeDaoBean {
 
     public List findRecipeByLiveSearch(String nameChars) {
         Query query = entityManager.createNamedQuery("Recipe.findRecipeByLiveSearch");
-        query.setParameter("nameChars", "%" + nameChars + "%");
+        query.setParameter("nameChars", nameChars);
         return query.getResultList();
     }
 

@@ -18,7 +18,6 @@ public class UserRestService {
 
   @EJB
   private UserService userService;
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
   @DELETE

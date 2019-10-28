@@ -11,7 +11,6 @@ import java.util.Set;
         @NamedQuery(
                 name = "Recipe.findTop10Recipies",
                 query = "SELECT rs.recipieName, count (rs.recipieName) as quantity FROM RecipeStatistics rs  WHERE rs.type =1 GROUP BY rs.recipieName ORDER BY quantity DESC")
-
 })
 
 public class RecipeStatistics {
@@ -53,16 +52,9 @@ public class RecipeStatistics {
     public void setType(int type) {
         this.type = type;
     }
-    public Long getRecipieId() {
-        return recipieId;
-    }
 
     public void setRecipieId(Long recipieId) {
         this.recipieId = recipieId;
-    }
-
-    public String getRecipieName() {
-        return recipieName;
     }
 
     public void setRecipieName(String recipieName) {
@@ -84,7 +76,4 @@ public class RecipeStatistics {
     public void setCategories(Set<Long> categories) {
         this.categories = categories;
     }
-
-
-
 }

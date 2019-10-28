@@ -27,7 +27,7 @@ public class ParserService implements Serializable {
     return mapper.readTree(file);
   }
 
-  public <T> Object parse(JsonNode jsonNode) throws IOException {
+  <T> Object parse(JsonNode jsonNode) throws IOException {
     logger.info("Parse data from file");
     return mapper.readValue(jsonNode.get(JSON_ROOT).toString(),
         new TypeReference<List<RecipeResponse>>() {
